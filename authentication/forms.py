@@ -17,3 +17,12 @@ class RegisterForm(forms.ModelForm):
 
         if password != password_confirm:
             self.add_error('password_confirm', 'Passwords do not match')
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    remember_me = forms.BooleanField(required=False)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'remember_me']
