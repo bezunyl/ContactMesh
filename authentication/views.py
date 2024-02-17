@@ -32,7 +32,9 @@ def login(req):
                 if not form.cleaned_data.get('remember_me'):
                     req.session.set_expiry(0)
 
-                return redirect('contacts:index')
+                next_url = req.GET.get('next', 'contacts:index')
+
+                return redirect(next_url)
             else:
                 form.add_error(None, 'Invalid username or password')
     else:
