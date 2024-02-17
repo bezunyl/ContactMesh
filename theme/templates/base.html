@@ -2,18 +2,64 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Django Tailwind</title>
+    <title>{% block title %}{% endblock title %} // ContactMesh</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
-		<div class="container mx-auto">
-			<section class="flex items-center justify-center h-screen">
-				<h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-			</section>
+	<body class="bg-slate-900 text-white font-sans leading-normal tracking-normal">
+		<div class="px-4 py-5 shadow-xl shadow-slate-950">
+			<div class="container mx-auto">
+				<div class="flex items-center justify-between">
+					<a href="/" class="text-white text-2xl font-bold">ContactMesh</a>
+					<div class="relative" id="dropdownContainer">
+						<button onclick="toggleDropdown()" class="text-gray-300 hover:text-white">Menu</button>
+						<div id="dropdown" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-md hidden">
+							<ul class="py-1">
+								<li><a href="/" class="block px-4 py-2 hover:bg-gray-200">Home</a></li>
+								<li><a href="/contacts/" class="block px-4 py-2 hover:bg-gray-200">Contacts</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		
+		<div class="container mx-auto p-10">
+			{% block content %}{% endblock content %}
+		</div>
+
+		<script>
+			function toggleDropdown() {
+				var dropdown = document.getElementById("dropdown");
+				dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+			}
+		
+			document.addEventListener('click', function(event) {
+				var dropdownContainer = document.getElementById("dropdownContainer");
+				var dropdown = document.getElementById("dropdown");
+				var isClickInside = dropdownContainer.contains(event.target);
+		
+				if (!isClickInside) {
+					dropdown.style.display = "none";
+				}
+			});
+		
+			document.addEventListener('keydown', function(event) {
+				var dropdown = document.getElementById("dropdown");
+				var isEscape = event.key === "Escape" || event.key === "Esc";
+		
+				if (isEscape) {
+					dropdown.style.display = "none";
+				}
+			});
+		
+			window.toggleDropdown = toggleDropdown;
+		
+			// Set focus to the body to ensure the document has focus
+			document.body.focus();
+		</script>
 	</body>
 </html>

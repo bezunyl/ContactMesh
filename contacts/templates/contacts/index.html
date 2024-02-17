@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacts{% endblock title %}
+
+{% block content %}
+
+<section class="flex items-center justify-center mt-10">
+    <div class="w-full">
+        <div class="flex items-center justify-center mb-4">
+            <h1 class="text-4xl font-mono font-bold">Search for contacts</h1>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+            <input type="text" class="border-slate-700 border-2 rounded-md bg-slate-800 w-1/2 h-10"/>
+            <button class="bg-slate-800 h-10 px-2 border-slate-700 border-2 rounded-md">Search</button>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
