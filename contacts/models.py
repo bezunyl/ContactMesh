@@ -1,9 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Contact(models.Model):
+    owner = models.ForeignKey(User, related_name='contacts', on_delete=models.CASCADE)
+    is_owner = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
     address_country = models.CharField(max_length=100, blank=True)
     address_city = models.CharField(max_length=100, blank=True)
     address_zip = models.CharField('Address ZIP Code', max_length=10, blank=True)
