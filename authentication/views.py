@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from contacts.models import Contact
 
 from .forms import RegisterForm, LoginForm
 
@@ -11,6 +12,8 @@ def register(req):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
+
+            Contact.objects.create(owner=user, is_owner=True, first_name=user.first_name, last_name=user.last_name)
 
             return redirect('authentication:login')
     
