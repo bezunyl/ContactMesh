@@ -16,4 +16,46 @@
     </div>
 </section>
 
+<section class="mt-10">
+    {% for contact in user_contacts %}
+        <div class="grid grid-flow-col justify-between my-4 p-4 w-full bg-slate-800 rounded-md border-l-8 border-cyan-400">
+            <div class="flex flex-col my-auto">
+                <div class="font-bold text-2xl">
+                    {{ contact.get_full_name }}
+                </div>
+
+                {% if contact.email %}
+                    <div>
+                        {{ contact.email }}
+                    </div>
+                {% else %}
+                    <div class="text-gray-400">
+                        No email address
+                    </div>
+                {% endif %}
+
+                {% if contact.phone %}
+                    <div>
+                        {{ contact.phone }}
+                    </div>
+                {% else %}
+                    <div class="text-gray-400">
+                        No phone number
+                    </div>
+                {% endif %}
+            </div>
+            <div class="flex justify-center my-auto">
+                {{ contact.get_formatted_address }}
+            </div>
+            <div class="flex justify-center my-auto">
+                {{ contact.notes }}
+            </div>
+        </div>
+    {% empty %}
+        <div class="flex items-center justify-center mt-10">
+            <p class="text-2xl font-bold text-gray-400">No contacts found</p>
+        </div>
+    {% endfor %}
+</section>
+
 {% endblock content %}
